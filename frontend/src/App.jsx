@@ -1,20 +1,18 @@
 import MaterialList from "./components/MaterialList";
 // import TestUpload from "./components/TestUpload";
 import UploadMaterial from "./components/UploadMaterial";
+import Header from "./components/Header";
+
+
 
 function App() {
   return (
     
     <div>
-        <div style={{ padding: "20px" }}>
-          <h1>📚 StudyZone</h1>
-         
+           <Header />
            <UploadMaterial />
             <hr />
              <MaterialList />
-        </div>
-        
-
 
     </div>
   );
