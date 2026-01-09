@@ -1,15 +1,7 @@
-function MaterialCard({ material }) {
-  const handleView = () => {
-    window.open(
-      `http://127.0.0.1:8000/materials/${material.id}/view/`,
-      "_blank"
-    );
-  };
+import { useNavigate } from "react-router-dom";
 
-  const handleDownload = () => {
-    window.location.href =
-      `http://127.0.0.1:8000/materials/${material.id}/download/`;
-  };
+function MaterialCard({ material }) {
+  const navigate = useNavigate();
 
   return (
     <div
@@ -21,8 +13,20 @@ function MaterialCard({ material }) {
         boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
       }}
     >
-      {/* PDF ICON */}
-      <div style={{ fontSize: "40px", textAlign: "center" }}>📄</div>
+     {/* ✅ PDF THUMBNAIL */}
+      <img
+            src={`https://docs.google.com/gview?url=${material.file_url}&embedded=true`}
+            alt="PDF Preview"
+            style={{
+              width: "100%",
+              height: "200px",
+              objectFit: "cover",
+              borderRadius: "4px",
+              cursor: "pointer"
+            }}
+            onClick={() => navigate(`/material/${material.id}`)}
+          />
+
 
       <h3>{material.title}</h3>
 
@@ -31,12 +35,18 @@ function MaterialCard({ material }) {
       <p><b>Module:</b> {material.module}</p>
 
       <div style={{ marginTop: "10px" }}>
-        <button onClick={handleView} style={{ marginRight: "10px" }}>
+        {/* ✅ ROUTER NAVIGATION */}
+        <button
+          onClick={() => navigate(`/material/${material.id}`)}
+          style={{ marginRight: "10px" }}
+        >
           View
         </button>
-        <button onClick={handleDownload}>
-          Download
-        </button>
+
+        {/* ✅ DIRECT DOWNLOAD */}
+        <a href={material.file_url} download>
+          <button>Download</button>
+        </a>
       </div>
 
       <p style={{ marginTop: "10px", fontSize: "14px" }}>

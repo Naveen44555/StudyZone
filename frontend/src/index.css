@@ -1,0 +1,28 @@
+/* Desktop */
+.material-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .material-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .material-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+/* body {
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+  display: none;
+} */

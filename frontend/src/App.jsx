@@ -1,21 +1,31 @@
-import MaterialList from "./components/MaterialList";
-// import TestUpload from "./components/TestUpload";
-import UploadMaterial from "./components/UploadMaterial";
+// import AdminPanel from "./components/AdminPanel";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-
-
+import UploadMaterial from "./components/UploadMaterial";
+import MaterialList from "./components/MaterialList";
+import ViewMaterial from "./components/ViewMaterial";
 
 function App() {
   return (
-    
-    <div>
-           <Header />
-           <UploadMaterial />
-            <hr />
-             <MaterialList />
+    <BrowserRouter>
+      <Header />
 
-    </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <UploadMaterial />
+              <MaterialList />
+            </>
+          }
+        />
+
+        <Route path="/material/:id" element={<ViewMaterial />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
+

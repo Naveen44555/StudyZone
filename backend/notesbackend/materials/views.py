@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 
-# ✅ LIST APPROVED MATERIALS
+# ✅ LIST APPROVED MATERIALS ➡ READ‑ONLY ➡ Shows approved content to users
 def approved_materials(request):
     materials = Material.objects.filter(status='approved').values(
         'id',
@@ -20,6 +20,16 @@ def approved_materials(request):
         'created_at'
     )
     return JsonResponse(list(materials), safe=False)
+
+# ---
+
+@csrf_exempt        #➡ ACTION / UPDATE ,➡ Used by admin to change status
+def approve_material(request, id):
+    material = Material.objects.get(id=id)
+    material.status = "approved"
+    material.save()
+    return JsonResponse({"message": "Approved"})
+
 
 # ✅ VIEW MATERIAL (opens PDF + increases view count)
 def view_material(request, material_id):
@@ -39,6 +49,21 @@ def download_material(request, material_id):
         as_attachment=True
     )
 
+# pending
+def pending_materials(request):
+    materials = Material.objects.filter(status="pending").values()
+    return JsonResponse(list(materials), safe=False)
+
+# get_material
+def get_material(request, id):
+    material = Material.objects.get(id=id)
+    return JsonResponse({
+        "id": material.id,
+        "title": material.title,
+        "file_url": material.file_url
+    })
+
+
 @csrf_exempt
 def create_material(request):
     if request.method != "POST":
@@ -50,11 +75,13 @@ def create_material(request):
         material = Material.objects.create(
             title=data.get("title"),
             subject=data.get("subject"),
-            semester=int(data.get("semester")),
-            module=int(data.get("module")),
+            semester=data.get("semester"),
+            module=data.get("module"),
+            category=data.get("category", "notes"),
             file_url=data.get("file_url"),
-            status="approved"
+            status="pending"   # 👈 VERY IMPORTANT
         )
+
 
         return JsonResponse({
             "message": "Material created",
