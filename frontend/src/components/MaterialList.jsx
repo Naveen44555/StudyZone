@@ -61,9 +61,7 @@ function MaterialList() {
               }}
             >
               Reset
-            </button>
-
-            
+            </button>            
 
       </div>
 

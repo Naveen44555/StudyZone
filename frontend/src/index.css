@@ -15,6 +15,7 @@
   .material-grid {
     grid-template-columns: repeat(1, 1fr);
   }
+
 }
 
 
@@ -26,3 +27,74 @@
 hr {
   display: none;
 } */
+
+button {
+  background: none;
+  border: 2px rgb(214, 35, 8) solid;
+  cursor: pointer;
+}
+
+
+.icon-bar {
+  display: flex;
+  align-items: center;
+}
+
+/* Icon button base */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 26px;
+  padding: 6px;
+}
+
+.icon-btn.dd {
+  border: 2px solid rgb(157, 150, 164);
+  border-radius: 6px;
+  padding: 5px 10px;
+
+  /* 👇 CENTER ICON */
+  display: flex;
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* horizontal center */
+}
+
+
+
+/* Colors */
+.icon-btn.whatsapp {
+  color: #59ec05;
+}
+.icon-btn.telegram {
+  color: #229ed9;
+}
+
+/* MOBILE FIX */
+@media (max-width: 600px) {
+  .icon-bar {
+    gap: 10px;
+  }
+
+  .icon-btn {
+    font-size: 20px;   /* 👈 smaller icons */
+    padding: 4px;
+  }
+
+}
+
+@media (max-width: 320px) {
+  .icon-bar {
+    gap: 2px;
+  }
+
+  .icon-btn {
+    font-size: 19px;   /* 👈 smaller icons */
+    padding: 5px 1px;
+  }
+  .icon-btn.dd{
+    /* width: 20px; */
+    padding: 2px;
+  }
+
+}
