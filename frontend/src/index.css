@@ -45,12 +45,21 @@ button {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 26px;
+  font-size: 28px;
   padding: 6px;
+    transition: transform 0.2s ease;
+}
+/* .icon-btn:hover {
+  border: 2px solid #999;
+} */
+
+.icon-btn:hover {
+  transform: scale(1.23); /* zoom */
 }
 
+
 .icon-btn.dd {
-  border: 2px solid rgb(157, 150, 164);
+  border: 1px solid rgb(157, 150, 164);
   border-radius: 6px;
   padding: 5px 10px;
 
@@ -65,10 +74,15 @@ button {
 /* Colors */
 .icon-btn.whatsapp {
   color: #59ec05;
+ 
+  /* font-size: 33px; */
 }
 .icon-btn.telegram {
   color: #229ed9;
+  /* font-size: 33px; */
 }
+
+
 
 /* MOBILE FIX */
 @media (max-width: 600px) {
@@ -77,8 +91,8 @@ button {
   }
 
   .icon-btn {
-    font-size: 20px;   /* 👈 smaller icons */
-    padding: 4px;
+    font-size: 23px;   /* 👈 smaller icons */
+    padding: 2px;
   }
 
 }

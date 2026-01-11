@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 
-function MaterialCard({ material }) {
+
+const user = { role: "admin" }; // TEMP ONLY
+
+function MaterialCard({ material, user }) {
   const navigate = useNavigate();
 
   return (
@@ -27,7 +30,6 @@ function MaterialCard({ material }) {
             onClick={() => navigate(`/material/${material.id}`)}
           />
 
-
       <h3>{material.title}</h3>
 
       <p><b>Subject:</b> {material.subject}</p>
@@ -43,15 +45,16 @@ function MaterialCard({ material }) {
           View
         </button>
 
-        {/* ✅ DIRECT DOWNLOAD */}
-        <a href={material.file_url} download>
-          <button>Download</button>
-        </a>
+        
+
       </div>
 
-      <p style={{ marginTop: "10px", fontSize: "14px" }}>
-        👁 {material.views_count} | ⬇ {material.downloads_count}
-      </p>
+      {user?.role === "admin" && (
+        <p style={{ fontSize: "12px", opacity: 0.7 }}>
+          👁 {material.views_count} &nbsp; ⬇ {material.downloads_count}
+        </p>
+)}
+
     </div>
   );
 }

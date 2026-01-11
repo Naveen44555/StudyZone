@@ -101,17 +101,19 @@ function ViewMaterial() {
       <div  
         style={{
           height: "80vh",
+          border:"2px red solid",
           borderRadius: "10px",
+          marginBottom:"25px",
           overflow: "hidden",
           background: "#000"
         }}
       >
-        <embed 
+        <embed  className="lastpdf"
           src={`${material.file_url}#toolbar=0&navpanes=0&scrollbar=1`}
           type="application/pdf"
           width="100%"
           height="100%"
-          style={{ display: "block" }}
+          style={{ display: "block"}}
         />
       </div>
     </div>

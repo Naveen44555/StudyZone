@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import MaterialCard from "./MaterialCard";
 // import "./index.css";
 
+const user = {
+  role: "admin" // or "student"
+};
 
 function MaterialList() {
   const [materials, setMaterials] = useState([]);
@@ -76,9 +79,16 @@ function MaterialList() {
             padding: "20px",
           }} >
 
+   
     {filteredMaterials.map((m) => (
-      <MaterialCard key={m.id} material={m} />
-    ))}
+  <MaterialCard
+    key={m.id}
+    material={m}
+    user={user}
+  />
+))}
+
+
   </div>
 </div>
 
