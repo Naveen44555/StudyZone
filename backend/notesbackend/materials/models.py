@@ -83,3 +83,22 @@ class QueryReply(models.Model):
     replied_by = models.ForeignKey(User, on_delete=models.CASCADE)
     reply = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+# ----------CREATE TRACKING 
+
+class MaterialView(models.Model):
+    material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('material', 'user')
+
+# ----------
+class MaterialDownload(models.Model):
+    material = models.ForeignKey(Material, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('material', 'user')
+

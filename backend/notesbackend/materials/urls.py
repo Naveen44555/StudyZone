@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import approved_materials, view_material, download_material, create_material,pending_materials,approve_material,get_material
+from .views import approved_materials, view_material, download_material, create_material,pending_materials,approve_material,get_material,increment_download
 
 urlpatterns = [
     path('approved/', approved_materials),
@@ -9,6 +9,7 @@ urlpatterns = [
      path("create/", create_material, name="create_material"),
      path("pending/", pending_materials),
      path("<int:id>/", get_material),
+     path("<int:id>/download/", increment_download),
 
 
     

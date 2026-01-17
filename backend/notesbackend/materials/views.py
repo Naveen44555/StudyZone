@@ -1,8 +1,53 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse, FileResponse
-from .models import Material
+from .models import Material,MaterialView,MaterialDownload
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.contrib.auth.decorators import login_required
+
+
+#----login
+@login_required
+def increment_view(request, id):
+
+    # 🔐 ADMIN CHECK HERE ALSO
+    if request.user.profile.role != "admin":
+        return JsonResponse({"error": "Forbidden"}, status=403)
+
+    material = Material.objects.get(id=id)
+
+    obj, created = MaterialView.objects.get_or_create(
+        material=material,
+        user=request.user
+    )
+
+    if created:
+        material.views_count += 1
+        material.save()
+
+    return JsonResponse({"views": material.views_count})
+
+
+#  MaterialDownload
+@login_required
+def increment_download(request, id):
+
+    # 🔐 STEP 5 — ADMIN ONLY CHECK (ADD HERE)
+    if request.user.profile.role != "admin":
+        return JsonResponse({"error": "Forbidden"}, status=403)
+
+    material = Material.objects.get(id=id)
+
+    obj, created = MaterialDownload.objects.get_or_create(
+        material=material,
+        user=request.user
+    )
+
+    if created:
+        material.downloads_count += 1
+        material.save()
+
+    return JsonResponse({"downloads": material.downloads_count})
 
 
 # ✅ LIST APPROVED MATERIALS ➡ READ‑ONLY ➡ Shows approved content to users
