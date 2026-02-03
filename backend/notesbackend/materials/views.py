@@ -108,7 +108,6 @@ def get_material(request, id):
         "file_url": material.file_url
     })
 
-
 @csrf_exempt
 def create_material(request):
     if request.method != "POST":
@@ -127,7 +126,6 @@ def create_material(request):
             status="pending"   # 👈 VERY IMPORTANT
         )
 
-
         return JsonResponse({
             "message": "Material created",
             "id": material.id
@@ -139,3 +137,4 @@ def create_material(request):
             {"error": str(e)},
             status=500
         )
+    
