@@ -1,5 +1,7 @@
-Django==4.2.13
+Django
 gunicorn
-django-cors-headers
 whitenoise
+django-cors-headers
+dj-database-url
 psycopg2-binary
+
