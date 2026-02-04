@@ -1,101 +1,49 @@
 import { useEffect, useState } from "react";
-import MaterialCard from "./MaterialCard";
-// import "./index.css";
-
-const user = {
-  role: "admin" // or "student"
-};
 
 function MaterialList() {
   const [materials, setMaterials] = useState([]);
-  const [search, setSearch] = useState("");
-  const [semester, setSemester] = useState("");
-  const [module, setModule] = useState("");
-
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/materials/approved/")
-      .then(res => res.json())
-      .then(data => setMaterials(data));
+fetch("https://studyzone-11.onrender.com/materials/")
+      .then((res) => res.json())
+      .then((data) => {
+        setMaterials(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching materials:", err);
+        setLoading(false);
+      });
   }, []);
 
-  const filteredMaterials = materials.filter(m =>
-  m.subject.toLowerCase().includes(search.toLowerCase()) &&
-  (semester === "" || m.semester == semester) &&
-  (module === "" || m.module == module)
-);
-
+  if (loading) return <p>Loading materials...</p>;
 
   return (
-    <>
-      {/* FILTER BAR */}
-      <div style={{ marginBottom: "20px" }}>
-          <input
-            placeholder="Search subject"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
+    <div>
+      <h2>Available Materials</h2>
 
-          <select
-            value={semester}
-            onChange={e => setSemester(e.target.value)} >
-            <option value="">All Semesters</option>
-            <option value="1">Semester 1</option>
-            <option value="2">Semester 2</option>
-            <option value="3">Semester 3</option>
-          </select>
+      {materials.length === 0 && <p>No materials found</p>}
 
-          <select
-              value={module}
-              onChange={e => setModule(e.target.value)}
+      {materials.map((m) => (
+        <div key={m.id} style={{ marginBottom: "15px" }}>
+          <h3>{m.title}</h3>
+          <p>
+            {m.subject} | Semester {m.semester}
+          </p>
+
+          {m.file_url && (
+            <a
+              href={`https://studyzone-11.onrender.com${m.file_url}`}
+              target="_blank"
+              rel="noreferrer"
             >
-              <option value="">All Modules</option>
-              <option value="1">Module 1</option>
-              <option value="2">Module 2</option>
-              <option value="3">Module 3</option>
-            </select>
-
-             {/* ✅ RESET BUTTON */}
-            <button
-              onClick={() => {
-                setSearch("");
-                setSemester("");
-                setModule("");
-              }}
-            >
-              Reset
-            </button>            
-
-      </div>
-
-      {/* CARDS */}
-      <div style={{ maxWidth: "1500px", margin: "0 auto" }}>
-           <div style={{ maxWidth: "1500px", margin: "0 auto" }}>
-      <div
-          className="material-grid"
-          style={{
-            display: "grid",
-            gap: "20px",
-            padding: "20px",
-          }} >
-
-   
-    {filteredMaterials.map((m) => (
-  <MaterialCard
-    key={m.id}
-    material={m}
-    user={user}
-  />
-))}
-
-
-  </div>
-</div>
-
-
-</div>
-
-    </>
+              📄 Open PDF
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
   );
 }
 
