@@ -2,11 +2,10 @@ from django.shortcuts import get_object_or_404, redirect
 from django.http import JsonResponse, FileResponse
 from .models import Material, MaterialView, MaterialDownload
 from django.contrib.auth.decorators import login_required
-from rest_framework.decorators import api_view
 
 
 # ✅ LIST APPROVED MATERIALS (FOR FRONTEND)
-@api_view(['GET'])
+
 def material_list(request):
     materials = Material.objects.filter(status='approved')
 
@@ -148,7 +147,7 @@ def download_material(request, material_id):
 #     return JsonResponse({"message": "Approved"})
 
 
-# # ✅ VIEW MATERIAL (opens PDF + increases view count)
+# #  VIEW MATERIAL (opens PDF + increases view count)
 # def view_material(request, material_id):
 #     material = get_object_or_404(Material, id=material_id, status='approved')
 #     material.views_count += 1
