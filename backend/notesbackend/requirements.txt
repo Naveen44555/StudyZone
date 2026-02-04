@@ -3,7 +3,6 @@ gunicorn
 whitenoise
 django-cors-headers
 dj-database-url
+djangorestframework
 psycopg2-binary
 
-python-dotenv
-  'rest_framework', 
