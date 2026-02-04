@@ -26,6 +26,5 @@ urlpatterns = [
     path('', lambda request: HttpResponse("StudyZone backend is running")),
 ]
 
-# ✅ REQUIRED to serve uploaded PDFs
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# ✅ ALWAYS serve media (Render needs this)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
