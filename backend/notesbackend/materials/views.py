@@ -138,3 +138,19 @@ def create_material(request):
             status=500
         )
     
+
+def materials_list(request):
+    materials = Material.objects.filter(status='approved')
+
+    data = []
+    for m in materials:
+        data.append({
+            "id": m.id,
+            "title": m.title,
+            "subject": m.subject,
+            "semester": m.semester,
+            "category": m.category,
+            "file_url": m.file.url if m.file else None,
+        })
+
+    return JsonResponse(data, safe=False)
