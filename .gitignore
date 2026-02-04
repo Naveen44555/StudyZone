@@ -3,3 +3,4 @@ myvenv/
 backend/.env
 __pycache__/
 *.pyc
+notesbackend/.env
