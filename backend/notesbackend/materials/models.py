@@ -46,7 +46,7 @@ class Material(models.Model):
 
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
 
-    file = models.FileField(upload_to="materials/", null=True, blank=True)   # ✅ PDF upload
+    file_url = models.URLField(blank=True, null=True)
     uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')

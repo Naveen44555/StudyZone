@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Material, UserProfile, Query, QueryReply
 
+
 @admin.register(Material)
 class MaterialAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'status', 'uploaded_by', 'created_at')
