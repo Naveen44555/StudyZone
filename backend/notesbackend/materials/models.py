@@ -46,9 +46,8 @@ class Material(models.Model):
 
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES)
 
-    file_url = models.URLField()  # Supabase PDF URL
-    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE,  null=True,
-    blank=True)
+    file = models.FileField(upload_to="materials/", null=True, blank=True)   # ✅ PDF upload
+    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     rejection_reason = models.TextField(blank=True, null=True)
@@ -57,10 +56,8 @@ class Material(models.Model):
     downloads_count = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return self.title
-
 
 # -----------------------------
 # Queries / Doubts (NEW FEATURE)

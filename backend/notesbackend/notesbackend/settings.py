@@ -30,7 +30,12 @@ SECRET_KEY = 'django-insecure-bd1z8^$wqhn2w!p54w#*qx$uu$#js-71=#0@ttdrz_nb-z4v5(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.onrender.com', "studyzone-11.onrender.com", 'localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://studyzone-11.onrender.com",
+]
+
 
 # Application definition
 
@@ -49,6 +54,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -131,7 +137,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 # added iam
 CORS_ALLOW_ALL_ORIGINS = True
