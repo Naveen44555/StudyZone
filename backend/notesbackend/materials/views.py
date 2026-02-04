@@ -150,7 +150,8 @@ def materials_list(request):
             "subject": m.subject,
             "semester": m.semester,
             "category": m.category,
-            "file_url": m.file.url if m.file else None,
+            "file_url": request.build_absolute_uri(m.file.url) if m.file else None,
+
         })
 
     return JsonResponse(data, safe=False)
