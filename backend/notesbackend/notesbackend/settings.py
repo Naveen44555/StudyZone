@@ -31,9 +31,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-bd1z8^$wqhn2w!p54w#*qx$uu$#js-71=#0@ttdrz_nb-z4v5('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = False
 
-ALLOWED_HOSTS = ['.onrender.com', "studyzone-11.onrender.com", 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [ "studyzone-11.onrender.com", 'localhost', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://studyzone-11.onrender.com",
